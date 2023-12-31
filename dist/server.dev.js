@@ -10,24 +10,27 @@ var dotenv = require('dotenv');
 
 var connectDB = require('./config/db');
 
-var path = require('path'); //dot env
+var path = require('path'); // Dotenv configuration
 
 
-dotenv.config(); //mongo DB
+dotenv.config(); // MongoDB connection
 
-connectDB();
-var app = express();
+connectDB(); // Create Express app
+
+var app = express(); // Middleware
+
 app.use(express.json());
-app.use(morgan('dev')); //routes
+app.use(morgan('dev')); // Static files
 
-app.use('/api/v1/user', require("./routes/userRoutes"));
+app.use(express["static"](path.join(__dirname, 'client/build'))); // API routes
+
+app.use('/api/v1/user', require('./routes/userRoutes'));
 app.use('/api/v1/admin', require('./routes/adminRoutes'));
-app.use('/api/v1/doctor', require('./routes/doctorRoutes')); // static files
+app.use('/api/v1/doctor', require('./routes/doctorRoutes')); // Wildcard route for serving index.html
 
-app.use(express["static"](path.join(__dirname, 'client/build')));
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
-}); //listen port
+}); // Listen to the port
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {

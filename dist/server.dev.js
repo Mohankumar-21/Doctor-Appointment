@@ -34,5 +34,5 @@ app.get('*', function (req, res) {
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
-  console.log("Server Running in ".concat(process.env.NODE_MODE, " Mode on port ").concat(process.env.PORT).bgCyan.white);
+  console.log("Server Running in ".concat(process.env.NODE_ENV, " Mode on port ").concat(process.env.PORT).bgCyan.white);
 });

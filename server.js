@@ -28,11 +28,12 @@ app.use('/api/v1/doctor', require('./routes/doctorRoutes'));
 
 // Wildcard route for serving index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
-});
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  });
+  
 
 // Listen to the port
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server Running in ${process.env.NODE_MODE} Mode on port ${process.env.PORT}`.bgCyan.white);
+  console.log(`Server Running in ${process.env.NODE_ENV} Mode on port ${process.env.PORT}`.bgCyan.white);
 });
